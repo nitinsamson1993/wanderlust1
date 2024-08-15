@@ -40,7 +40,6 @@ module.exports.createListing = async (req, res, next) => {
 
     let url = req.file.path;
     let filename = req.file.filename;
-    let result = listingSchema.validate(req.body);
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
     newListing.image = {url, filename}
@@ -62,7 +61,7 @@ module.exports.editListing = async (req, res) => {
     }
 
     let originalImageUrl = listing.image.url;
-    originalImageUrl = originalImageUrl.replace("/upload", "/upload/ w_250");
+    originalImageUrl = originalImageUrl.replace("/upload", "/upload/w_250");
     res.render("listings/edit.ejs", { listing, originalImageUrl });
   }
 
